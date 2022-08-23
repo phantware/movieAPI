@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
+const authRoute = require('./routes/auth')
 
 const app = express()
 dotenv.config()
@@ -16,6 +17,9 @@ const connect = async () => {
 mongoose.connection.on('disconnected', () => {
   console.log('mongoDB disconnected!')
 })
+
+app.use(express.json())
+app.use('/api/auth', authRoute)
 
 app.listen(8800, () => {
   connect()

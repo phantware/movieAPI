@@ -18,5 +18,6 @@ mongoose.connection.on('disconnected', () => {
 })
 
 app.listen(8800, () => {
-  console.log('server running at port 8800')
+  connect()
+  console.log('Connected to backend.')
 })

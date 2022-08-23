@@ -33,7 +33,10 @@ router.post('/login', async (req, res) => {
     if (originalPassword !== req.body.password) {
       return res.status(401).json('Wrong Credentials')
     }
-    return res.status(200).json(user)
+    //extracting password
+    const { password, ...info } = user._doc
+
+    return res.status(200).json(info)
   } catch (error) {
     res.status(500).json(error)
   }

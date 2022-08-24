@@ -43,7 +43,7 @@ router.post('/login', async (req, res) => {
     //extracting password
     const { password, ...info } = user._doc
 
-    return res.status(200).json(...info, accessToken)
+    return res.status(200).json({ ...info, accessToken })
   } catch (error) {
     res.status(500).json(error)
   }

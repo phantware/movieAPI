@@ -48,8 +48,8 @@ router.delete('/:id', verify, async (req, res) => {
 
 router.get('/find/:id', async (req, res) => {
   try {
-    const user = await User.findBy(req.params.id)
-    const { password, ...info } = user._id
+    const user = await User.findById(req.params.id)
+    const { password, ...info } = user._doc
     return res.status(200).json(info)
   } catch (err) {
     return res.status(500).json(err)
@@ -62,7 +62,9 @@ router.get('/', verify, async (req, res) => {
   const query = req.query.new
   if (req.user.isAdmin) {
     try {
-      const users = query ? await User.find().limit(10) : await User.find()
+      const users = query
+        ? await User.find().sort({ _id: -1 }).limit(2)
+        : await User.find()
       return res.status(200).json(users)
     } catch (err) {
       return res.status(500).json(err)

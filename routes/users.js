@@ -56,4 +56,20 @@ router.get('/find/:id', async (req, res) => {
   }
 })
 
+//GET ALL
+
+router.get('/', verify, async (req, res) => {
+  const query = req.query.new
+  if (req.user.isAdmin) {
+    try {
+      const users = query ? await User.find().limit(10) : await User.find()
+      return res.status(200).json(users)
+    } catch (err) {
+      return res.status(500).json(err)
+    }
+  } else {
+    return res.status(403).json('You not allowed to see all users!')
+  }
+})
+
 module.exports = router

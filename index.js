@@ -21,7 +21,7 @@ mongoose.connection.on('disconnected', () => {
 
 app.use(express.json())
 app.use('/api/auth', authRoute)
-app.use('/api/', userRoute)
+app.use('/api/users', userRoute)
 
 app.listen(8800, () => {
   connect()

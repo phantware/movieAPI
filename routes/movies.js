@@ -20,7 +20,7 @@ router.post('/', verify, async (req, res) => {
 
 //UPDATE
 
-router.post('/', verify, async (req, res) => {
+router.put('/:id', verify, async (req, res) => {
   if (req.user.isAdmin) {
     try {
       const updateMovie = await Movie.findByIdAndUpdate(
@@ -39,4 +39,18 @@ router.post('/', verify, async (req, res) => {
   }
 })
 
+//DELETE
+
+router.delete('/:id', verify, async (req, res) => {
+  if (req.user.isAdmin) {
+    try {
+      await Movie.findByIdAndDelete(req.params.id)
+      return res.status(200).json('The movie has been deleted....')
+    } catch (err) {
+      return res.status(500).json(err)
+    }
+  } else {
+    return res.status(403).json('You are not allowed!')
+  }
+})
 module.exports = router

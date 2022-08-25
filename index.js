@@ -7,6 +7,7 @@ const movieRoute = require('./routes/movies')
 
 const app = express()
 dotenv.config()
+const PORT = process.env.PORT || 8800
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL)
@@ -25,7 +26,7 @@ app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
 app.use('/api/movies', movieRoute)
 
-app.listen(8800, () => {
+app.listen(PORT, () => {
   connect()
   console.log('Connected to backend.')
 })

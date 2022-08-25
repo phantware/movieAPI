@@ -88,4 +88,18 @@ router.get('/random', verify, async (req, res) => {
   }
 })
 
+//GETL ALLS
+
+router.get('/', verify, async (req, res) => {
+  if (req.user.isAdmin) {
+    try {
+      const movies = await Movie.find(req.params.id)
+      return res.status(200).json(movies)
+    } catch (err) {
+      return res.status(500).json(err)
+    }
+  } else {
+    return res.status(403).json('You are not allowed!')
+  }
+})
 module.exports = router

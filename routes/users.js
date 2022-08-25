@@ -104,4 +104,8 @@ router.get('/stats', async (req, res) => {
     return res.status(500).json(err)
   }
 })
+
+router.get('/test', (req, res) => {
+  res.status(200).json('You get here')
+})
 module.exports = router

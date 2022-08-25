@@ -18,4 +18,18 @@ router.post('/', verify, async (req, res) => {
   }
 })
 
+//DELETE
+
+router.delete('/:id', verify, async (req, res) => {
+  if (req.user.isAdmin) {
+    try {
+      await List.findByIdAndDelete(req.params.id)
+      return res.status(201).json('The list has been deleted')
+    } catch (err) {
+      return res.status(500).json(err)
+    }
+  } else {
+    return res.status(403).json('You are not allowed!')
+  }
+})
 module.exports = router

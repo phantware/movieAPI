@@ -5,6 +5,14 @@ const authRoute = require('./routes/auth')
 const userRoute = require('./routes/users')
 const movieRoute = require('./routes/movies')
 const listRoute = require('./routes/lists')
+const cors = require('cors')
+
+const corsOption = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+}
 
 const app = express()
 dotenv.config()
@@ -22,6 +30,7 @@ mongoose.connection.on('disconnected', () => {
   console.log('mongoDB disconnected!')
 })
 
+app.use(cors(corsOption))
 app.use(express.json())
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)

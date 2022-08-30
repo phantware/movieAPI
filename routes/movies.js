@@ -14,6 +14,7 @@ router.post('/', verify, async (req, res) => {
       return res.status(500).json(err)
     }
   } else {
+    console.log('movies', err.message)
     return res.status(403).json('You are not allowed!')
   }
 })

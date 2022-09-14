@@ -60,6 +60,7 @@ router.get('/', verify, async (req, res) => {
     } else {
       list = await List.aggregate([{ $sample: { size: 10 } }])
     }
+    console.log('list', list)
     return res.status(200).json(list)
   } catch (err) {
     return res.status(500).json(err)

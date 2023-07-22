@@ -71,6 +71,10 @@ app.use('/api/users', userRoute)
 app.use('/api/movies', movieRoute)
 app.use('/api/lists', listRoute)
 
+app.get('/', (req, res) => {
+  res.send('Welcome to movie API.')
+})
+
 app.listen(PORT, () => {
   connect()
   console.log('Connected to backend.')
